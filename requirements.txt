@@ -1,5 +1,4 @@
 # List of required packages (Dependencies)
 telegram
-time
 requests
 bs4
