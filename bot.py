@@ -41,13 +41,14 @@ dispatcher.add_handler(start_handler)
 def weather(bot, update):
     bot.sendChatAction(chat_id=update.message.chat_id,
                        action=ChatAction.TYPING)
+    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /problem to tell me your problems, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
+     
     url = 'https://www.google.com.sg/search?q=show+singapore+weather&oq=show+singapore+weather&aqs=chrome..69i57.3136j0j7&sourceid=chrome&ie=UTF-8'
     res = requests.get(url)
     soup = BeautifulSoup(res.text,'lxml')
     quote = soup.find_all('span', attrs={'class':'wob_t'})
     weath = soup.find_all('img', alt=True)
-    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /problem to tell me your problems, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
-     
+    
     now = datetime.datetime.now()
     time = now.strftime("%Y-%m-%d")
     bot.sendMessage(chat_id=update.message.chat_id, text= time + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
