@@ -6,5 +6,5 @@ nltk
 requests
 bs4
 emoji
-git+git:https://github.com/python/cpython/blob/master/Lib/urllib/request.py
+urllib.request
 
