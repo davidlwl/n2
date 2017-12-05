@@ -51,7 +51,8 @@ def weather(bot, update):
     time = now.strftime("%Y-%m-%d")
     bot.sendMessage(chat_id=update.message.chat_id, text= time + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
           "Range: " + quote[3].string + " - " + quote[2].string)
-    
+    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /problem to tell me your problems, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
+     
 weather_handler = CommandHandler('weather', weather)
 dispatcher.add_handler(weather_handler)
     
