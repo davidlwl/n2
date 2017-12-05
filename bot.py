@@ -49,7 +49,7 @@ def weather(bot, update):
 
     now = datetime.datetime.now()
     time = now.strftime("%Y-%m-%d")
-    update.message.reply_text(time + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
+    bot.sendMessage(chat_id=update.message.chat_id, text= time + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
           "Range: " + quote[3].string + " - " + quote[2].string)
     
 weather_handler = CommandHandler('weather', weather)
