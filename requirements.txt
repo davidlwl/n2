@@ -4,4 +4,5 @@ requests
 bs4
 emoji
 nltk
-webbrowser
+urllib
+
