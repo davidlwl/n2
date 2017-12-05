@@ -1,6 +1,5 @@
 import telegram
 from telegram.ext import Updater
-
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import logging
@@ -8,6 +7,7 @@ import time
 from telegram import InlineQueryResultArticle, ChatAction, InputTextMessageContent
 import requests
 from bs4 import BeautifulSoup
+'''
 import random
 import datetime
 import emoji
@@ -19,13 +19,14 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 import time
 from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords'''
 
 
 bot = telegram.Bot(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
 updater = Updater(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+updater.start_polling()
 
 def start(bot, update):
     bot.sendChatAction(chat_id=update.message.chat_id,
@@ -36,7 +37,7 @@ def start(bot, update):
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
-
+'''
 def weather(bot, update):
     bot.sendChatAction(chat_id=update.message.chat_id,
                        action=ChatAction.TYPING)
@@ -74,7 +75,7 @@ def problem(bot, update):
     update.message.reply_text(q)
 problem_handler = CommandHandler('problem', problem)
 dispatcher.add_handler(problem_handler)
-updater.start_polling()
+
 
 def strip(word):
     return word.strip().strip(',').strip(':').strip('(').strip(')').lower()
@@ -176,7 +177,7 @@ dispatcher.add_handler(echo_handler)
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
 unknown_handler = MessageHandler(Filters.command, unknown)
-dispatcher.add_handler(unknown_handler)
+dispatcher.add_handler(unknown_handler)'''
 
 
 
