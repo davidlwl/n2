@@ -6,6 +6,22 @@ import logging
 import time
 from telegram import InlineQueryResultArticle, ChatAction, InputTextMessageContent
 
+import requests
+from bs4 import BeautifulSoup
+import random
+import datetime
+import emoji
+import urllib.request
+import json
+
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
+import time
+from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
+
+
 bot = telegram.Bot(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
 updater = Updater(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
 dispatcher = updater.dispatcher
@@ -21,6 +37,23 @@ def start(bot, update):
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
+
+def weather(bot, update):
+    bot.sendChatAction(chat_id=update.message.chat_id,
+                       action=ChatAction.TYPING)
+    url = 'https://www.google.com.sg/search?q=show+singapore+weather&oq=show+singapore+weather&aqs=chrome..69i57.3136j0j7&sourceid=chrome&ie=UTF-8'
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text,'lxml')
+    quote = soup.find_all('span', attrs={'class':'wob_t'})
+    weath = soup.find_all('img', alt=True)
+
+    now = datetime.datetime.now()
+    time = now.strftime("%Y-%m-%d")
+    update.message.reply_text(time + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
+          "Range: " + quote[3].string + " - " + quote[2].string)
+    
+weather_handler = CommandHandler('weather', weather)
+dispatcher.add_handler(weather_handler)
     
 
     
