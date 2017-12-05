@@ -1,2 +1,2 @@
-# If you need to specify a version
-requests==2.16.5
+# List of required packages (Dependencies)
+python-telegram-bot==5.3.0
