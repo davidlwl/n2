@@ -4,6 +4,7 @@ datetime
 nltk
 requests
 bs4
+BeautifulSoup
 emoji
 python-telegram-bot
 
