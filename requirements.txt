@@ -5,5 +5,5 @@ nltk
 requests
 bs4
 emoji
-
+python-telegram-bot
 
