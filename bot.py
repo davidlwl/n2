@@ -1,8 +1,10 @@
 import telegram
 from telegram.ext import Updater
-import logging
+
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
+'''
+import logging
 import time
 from telegram import InlineQueryResultArticle, ChatAction, InputTextMessageContent
 import requests
@@ -19,7 +21,7 @@ from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 import time
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
-import webbrowser
+import webbrowser'''
 
 bot = telegram.Bot(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
 updater = Updater(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
@@ -35,7 +37,7 @@ def start(bot, update):
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
-
+'''
 def weather(bot, update):
     bot.sendChatAction(chat_id=update.message.chat_id,
                        action=ChatAction.TYPING)
@@ -175,7 +177,7 @@ dispatcher.add_handler(echo_handler)
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
 unknown_handler = MessageHandler(Filters.command, unknown)
-dispatcher.add_handler(unknown_handler)
+dispatcher.add_handler(unknown_handler)'''
 
 
 
