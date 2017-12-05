@@ -6,4 +6,4 @@ requests
 bs4
 emoji
 python-telegram-bot
-
+urllib.request.urlopen
