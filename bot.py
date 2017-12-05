@@ -55,6 +55,107 @@ def weather(bot, update):
     
 weather_handler = CommandHandler('weather', weather)
 dispatcher.add_handler(weather_handler)
+
+def strip(word):
+    return word.strip().strip(',').strip(':').strip('(').strip(')').lower()
+
+
+def get_only_text(url):
+    page = urllib.request.urlopen(url).read().decode('utf8')
+    soup = BeautifulSoup(page, 'lxml')
+    text = ' '.join(map(lambda p: p.text, soup.find_all('p')))
+    return soup.title.text, text
+
+def news(bot, update):
+    bot.sendChatAction(chat_id=update.message.chat_id,
+                       action=ChatAction.TYPING)
+    newsworthy = 'http://www.straitstimes.com/print/top-of-the-news/rss.xml'
+    feed_xml = urllib.request.urlopen(newsworthy).read()
+    feed = BeautifulSoup(feed_xml.decode('utf8'), 'lxml')
+    to_summarize = list(map(lambda p: p.text, feed.find_all('guid')))
+
+    for article_url in to_summarize[:10]:
+        i = to_summarize[:10].index(article_url)
+        title, text = get_only_text(article_url)
+        bot.sendMessage(chat_id=update.message.chat_id, text='<b>' + str(i+1) + ". " + title[:-20] +'</b>' +'\n' + article_url, parse_mode=telegram.ParseMode.HTML)
+        
+        #take out specific stop words
+        stop_words = set(stopwords.words('english'))
+        #split input text into sentences
+        input_text = sent_tokenize(text)
+        #getting freq of each word into a dict  
+        word_values = {}
+
+        for sentence in input_text:
+            words = sentence.split(' ')
+            for word in words:
+                word = strip(word)
+                if not word in stop_words:
+                    if not word in word_values:
+                        word_values[word] = 1
+                    else:
+                        word_values[word] += 1
+
+
+        sentence_values = []
+        for sentence in input_text:
+            sentence_value = 0   
+            words = sentence.split(' ')
+            for word in words:
+            #counts the sentence value using word_values dictionary
+                sentence_value += word_values.setdefault(word, 0)
+            sentence_values.append(sentence_value)
+            
+            
+
+        #how many sentences do you want = output_num
+        for ii in range(0, 2):
+            highest_val_ind = sentence_values.index(max(sentence_values))
+            
+            update.message.reply_text(input_text[highest_val_ind])
+            del input_text[highest_val_ind]
+            del sentence_values[highest_val_ind]
+
+    bot.sendMessage(chat_id=update.message.chat_id, text='<a href="http://libproxy.smu.edu.sg/login/sto1">Free Access!</a>', parse_mode=telegram.ParseMode.HTML)
+                      
+news_handler = CommandHandler('news', news)
+dispatcher.add_handler(news_handler)
+
+
+def shows(bot, update):
+    bot.sendChatAction(chat_id=update.message.chat_id,
+                       action=ChatAction.TYPING)
+    reply_keyboard = [['Yes', 'No']]
+
+    update.message.reply_text('Do you need suggestions?',
+    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     
+shows_handler = CommandHandler('shows', shows)
+dispatcher.add_handler(shows_handler)
+
+
+def echo(bot, update):
+    bot.sendChatAction(chat_id=update.message.chat_id,
+                       action=ChatAction.TYPING) 
+    if update.message.text == 'Yes':
+        update.message.reply_text("http://www.imdb.com/search/title?groups=top_250&sort=user_rating&my_ratings=exclude")
+    elif update.message.text == 'No':
+        update.message.reply_text('What movie/tv show would you like to watch today? ')
+        pass
+    else:
+        update.message.reply_text('https://bmovies.is/search?keyword=' + update.message.text.replace(' ', '+'))
+        update.message.reply_text('https://www.google.com.sg/search?ei=CmUmWtmXNcqMvQSRp6_QDA&q=site%3Atvshows4mobile.com+' + update.message.text.replace(' ', '+'))
+        update.message.reply_text('https://www.google.com.sg/search?ei=72UmWseQA4XUvgTsv4CwDA&q=site%3Ahdmp4mania.mobi+' + update.message.text.replace(' ', '+'))
+
+echo_handler = MessageHandler(Filters.text, echo)
+dispatcher.add_handler(echo_handler)
+
+
+#do command to clear all message 
+#added last
+def unknown(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
+unknown_handler = MessageHandler(Filters.command, unknown)
+dispatcher.add_handler(unknown_handler)
 
     
