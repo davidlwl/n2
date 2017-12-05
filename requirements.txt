@@ -5,5 +5,5 @@ nltk
 requests
 bs4
 emoji
-urllib.request
+
 
