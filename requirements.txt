@@ -1,8 +1,10 @@
 # List of required packages (Dependencies)
 telegram
+telegram.ext
+datetime
+git+git:https://github.com/nltk/nltk.git
 requests
 bs4
 emoji
-nltk
-
+git+git:https://github.com/python/cpython/blob/master/Lib/urllib/request.py
 
