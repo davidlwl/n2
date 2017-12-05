@@ -3,6 +3,5 @@ telegram
 requests
 bs4
 emoji
-nltk.tokenize
-nltk.corpus
+nltk
 webbrowser
