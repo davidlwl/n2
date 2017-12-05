@@ -2,7 +2,7 @@
 telegram
 telegram.ext
 datetime
-git+git:https://github.com/nltk/nltk.git
+nltk
 requests
 bs4
 emoji
