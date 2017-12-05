@@ -1,6 +1,5 @@
 # List of required packages (Dependencies)
 telegram
-telegram.ext
 datetime
 nltk
 requests
