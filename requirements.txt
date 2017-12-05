@@ -1,2 +1,2 @@
 # List of required packages (Dependencies)
-telegram,requests,bs4,logging,random,datetime,time,nltk.tokenize,nltk.corpus,webbrowser
+telegram, requests, bs4, logging, random, datetime, time, nltk.tokenize, nltk.corpus, webbrowser
