@@ -5,6 +5,8 @@ from telegram.ext import MessageHandler, Filters
 import logging
 import time
 from telegram import InlineQueryResultArticle, ChatAction, InputTextMessageContent
+import calendar
+from datetime import date
 
 import requests
 from bs4 import BeautifulSoup
@@ -50,7 +52,9 @@ def weather(bot, update):
     
     now = datetime.datetime.now()
     time = now.strftime("%Y-%m-%d")
-    update.message.reply_text(time + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
+    my_date = date.today()
+    
+    update.message.reply_text(time + " " + calendar.day_name[my_date.weekday()] + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
           "Range: " + quote[3].string + " - " + quote[2].string)
     
 weather_handler = CommandHandler('weather', weather)
