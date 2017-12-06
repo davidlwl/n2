@@ -8,4 +8,4 @@ beautifulsoup4
 emoji
 python-telegram-bot
 lxml
-
+feedparser
