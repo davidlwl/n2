@@ -7,4 +7,5 @@ bs4
 beautifulsoup4
 emoji
 python-telegram-bot
-urllib
+urllib.request
+urllib2
