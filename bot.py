@@ -59,7 +59,6 @@ def weather(bot, update):
     
 weather_handler = CommandHandler('weather', weather)
 dispatcher.add_handler(weather_handler)
-nltk.data.path.append('nltk_data')
 
 def strip(word):
     return word.strip().strip(',').strip(':').strip('(').strip(')').lower()
