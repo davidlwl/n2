@@ -24,8 +24,8 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 
 
-bot = telegram.Bot(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
-updater = Updater(token='343469925:AAHrvVL-rW3ixMG95u2-ehzPus5k5qmvNTE')
+bot = telegram.Bot(token='488042863:AAEg5rDm58mD3uJ3SMDFT5IAxKrpoPDhpoo')
+updater = Updater(token='488042863:AAEg5rDm58mD3uJ3SMDFT5IAxKrpoPDhpoo')
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 updater.start_polling()
@@ -33,7 +33,7 @@ updater.start_polling()
 def start(bot, update):
     bot.sendChatAction(chat_id=update.message.chat_id,
                        action=ChatAction.TYPING)
-    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /shows to view movies/tv shows, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
+    bot.sendMessage(chat_id=update.message.chat_id, text= "Type /weather to get the weather, \nType /news to get the latest news")
         
                     
 start_handler = CommandHandler('start', start)
@@ -56,9 +56,8 @@ def weather(bot, update):
     
     update.message.reply_text(time + " " + calendar.day_name[my_date.weekday()] + "\n"  + "Current Temperature: " + quote[0].string  + '\n' + "weather: " + weath[0]['alt'] + '\n'
           "Range: " + quote[3].string + " - " + quote[2].string)
-    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /shows to view movies/tv shows, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
-      
-    
+    bot.sendMessage(chat_id=update.message.chat_id, text= "Type /weather to get the weather, \nType /news to get the latest news")
+        
 weather_handler = CommandHandler('weather', weather)
 dispatcher.add_handler(weather_handler)
 
@@ -123,50 +122,17 @@ def news(bot, update):
             del sentence_values[highest_val_ind]
 
     bot.sendMessage(chat_id=update.message.chat_id, text='<a href="http://libproxy.smu.edu.sg/login/sto1">Free Access!</a>', parse_mode=telegram.ParseMode.HTML)
-    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /shows to view movies/tv shows, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
-                       
+    bot.sendMessage(chat_id=update.message.chat_id, text= "Type /weather to get the weather, \nType /news to get the latest news")                      
 news_handler = CommandHandler('news', news)
 dispatcher.add_handler(news_handler)
-
-
-def shows(bot, update):
-    bot.sendChatAction(chat_id=update.message.chat_id,
-                       action=ChatAction.TYPING)
-    reply_keyboard = [['Yes', 'No']]
-
-    update.message.reply_text('Do you need suggestions?',
-    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
-    
-shows_handler = CommandHandler('shows', shows)
-dispatcher.add_handler(shows_handler)
-
-
-def echo(bot, update):
-    bot.sendChatAction(chat_id=update.message.chat_id,
-                       action=ChatAction.TYPING) 
-    if update.message.text == 'Yes':
-        update.message.reply_text("http://www.imdb.com/search/title?groups=top_250&sort=user_rating&my_ratings=exclude")
-        bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /shows to view movies/tv shows, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
-      
-    elif update.message.text == 'No':
-        update.message.reply_text('What movie/tv show would you like to watch today? ')
-        pass
-    else:
-        update.message.reply_text('https://bmovies.is/search?keyword=' + update.message.text.replace(' ', '+'))
-        update.message.reply_text('https://www.google.com.sg/search?ei=CmUmWtmXNcqMvQSRp6_QDA&q=site%3Atvshows4mobile.com+' + update.message.text.replace(' ', '+'))
-        update.message.reply_text('https://www.google.com.sg/search?ei=72UmWseQA4XUvgTsv4CwDA&q=site%3Ahdmp4mania.mobi+' + update.message.text.replace(' ', '+'))
-        bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /shows to view movies/tv shows, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
-      
-echo_handler = MessageHandler(Filters.text, echo)
-dispatcher.add_handler(echo_handler)
 
 
 #do command to clear all message 
 #added last
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
-    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /shows to view movies/tv shows, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
-      
+    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /problem to tell me your problems, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
+    
 unknown_handler = MessageHandler(Filters.command, unknown)
 dispatcher.add_handler(unknown_handler)
 
