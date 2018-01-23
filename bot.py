@@ -121,7 +121,7 @@ def news(bot, update):
             del input_text[highest_val_ind]
             del sentence_values[highest_val_ind]
 
-    bot.sendMessage(chat_id=update.message.chat_id, text='<a href="http://libproxy.smu.edu.sg/login/sto1">Free Access!</a>', parse_mode=telegram.ParseMode.HTML)
+    
     bot.sendMessage(chat_id=update.message.chat_id, text= "Type /weather to get the weather, \nType /news to get the latest news")                      
 news_handler = CommandHandler('news', news)
 dispatcher.add_handler(news_handler)
@@ -131,7 +131,6 @@ dispatcher.add_handler(news_handler)
 #added last
 def unknown(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Sorry, I didn't understand that command.")
-    bot.sendMessage(chat_id=update.message.chat_id, text= "I'm ahbid, please talk to me! \nType /problem to tell me your problems, \nType /weather to get the weather, \nType /news to get the latest news, \nOr simple type anything to begin our conversation! ")
     
 unknown_handler = MessageHandler(Filters.command, unknown)
 dispatcher.add_handler(unknown_handler)
